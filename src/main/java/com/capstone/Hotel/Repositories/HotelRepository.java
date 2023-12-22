@@ -17,7 +17,7 @@ public interface HotelRepository extends JpaRepository<Hotels, Long> {
             "INNER JOIN Attachment atc ON atc.attachment_id = hatc.attachment_id\n" +
             "INNER JOIN HotelFacilities hofa ON hofa.id_hotel = h.hotel_id\n" +
             "INNER JOIN Facilities fac ON fac.facility_id = hofa.id_facility\n" +
-            "WHERE h.hotel_id = ?1",nativeQuery = true)
+            "WHERE h.hotel_id = ?1")
     List<HotelDetail> getDetailHotel(Integer hotelId);
 
 }
