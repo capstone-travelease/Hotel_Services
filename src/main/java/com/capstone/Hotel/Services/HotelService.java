@@ -1,5 +1,6 @@
 package com.capstone.Hotel.Services;
 
+import com.capstone.Hotel.DTOs.RequestBodyDTO;
 import com.capstone.Hotel.DTOs.ResponseHotel;
 import com.capstone.Hotel.DTOs.ResponseStatus;
 import com.capstone.Hotel.Entities.HotelDetail;
@@ -47,8 +48,8 @@ public class HotelService {
     }
 
     @Transactional
-    public ResponseStatus addHotel(Hotels requestBody){
-        hotelRepository.save(requestBody);
+    public ResponseStatus addHotel(RequestBodyDTO requestBody){
+        hotelRepository.addHotelRepo(requestBody.getHotelName(), requestBody.getHotelDescription(), requestBody.getPhoneNumber(), requestBody.getHotelAddress(), requestBody.getHotelCity(), requestBody.getHotelCountry(), requestBody.getHotelEmail(), requestBody.getCheckInTime(), requestBody.getCheckOutTime());
         return new ResponseStatus(
                 200,
                 "Add hotel successful",
@@ -57,12 +58,22 @@ public class HotelService {
     }
 
     public ResponseStatus deleteHotel(Long hotelId){
-        hotelRepository.deleteById(hotelId);
-        return new ResponseStatus(
-                200,
-                "Delete hotel " + hotelId +" successful",
-                "Successful"
-        );
+        var checkId = hotelRepository.existsById(hotelId);
+        if (checkId == false){
+            return new ResponseStatus(
+                    500,
+                    "The hotel have an id " + hotelId +" does not existed !",
+                    "Failure"
+            );
+        }
+        else{
+            hotelRepository.deleteById(hotelId);
+            return new ResponseStatus(
+                    200,
+                    "Delete hotel " + hotelId +" successful",
+                    "Successful"
+            );
+        }
     }
 
     public void updateHotel(){

@@ -1,5 +1,6 @@
 package com.capstone.Hotel.Controllers;
 
+import com.capstone.Hotel.DTOs.RequestBodyDTO;
 import com.capstone.Hotel.DTOs.ResponseHotel;
 import com.capstone.Hotel.DTOs.ResponseStatus;
 import com.capstone.Hotel.Entities.HotelDetail;
@@ -40,7 +41,7 @@ public class HotelController {
     }
 
     @PostMapping("/add")
-    public ResponseStatus AddHotel(@RequestBody Hotels requestBodyDTO){
+    public ResponseStatus AddHotel(@RequestBody RequestBodyDTO requestBodyDTO){
         return hotelService.addHotel(requestBodyDTO);
     }
 

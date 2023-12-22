@@ -10,19 +10,21 @@ public class RequestBodyDTO {
     private String hotelAddress;
     private String hotelCity;
     private String hotelCountry;
+    private String hotelEmail;
     private LocalDate checkInTime;
     private LocalDate checkOutTime;
 
     public RequestBodyDTO() {
     }
 
-    public RequestBodyDTO(String hotelName, String hotelDescription, String phoneNumber, String hotelAddress, String hotelCity, String hotelCountry, LocalDate checkInTime, LocalDate checkOutTime) {
+    public RequestBodyDTO(String hotelName, String hotelDescription, String phoneNumber, String hotelAddress, String hotelCity, String hotelCountry, String hotelEmail, LocalDate checkInTime, LocalDate checkOutTime) {
         this.hotelName = hotelName;
         this.hotelDescription = hotelDescription;
         this.phoneNumber = phoneNumber;
         this.hotelAddress = hotelAddress;
         this.hotelCity = hotelCity;
         this.hotelCountry = hotelCountry;
+        this.hotelEmail = hotelEmail;
         this.checkInTime = checkInTime;
         this.checkOutTime = checkOutTime;
     }
@@ -73,6 +75,14 @@ public class RequestBodyDTO {
 
     public void setHotelCountry(String hotelCountry) {
         this.hotelCountry = hotelCountry;
+    }
+
+    public String getHotelEmail() {
+        return hotelEmail;
+    }
+
+    public void setHotelEmail(String hotelEmail) {
+        this.hotelEmail = hotelEmail;
     }
 
     public LocalDate getCheckInTime() {

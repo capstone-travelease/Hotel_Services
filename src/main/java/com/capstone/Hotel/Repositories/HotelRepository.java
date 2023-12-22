@@ -4,11 +4,13 @@ import com.capstone.Hotel.DTOs.RequestBodyDTO;
 import com.capstone.Hotel.Entities.HotelDetail;
 import com.capstone.Hotel.Entities.Hotels;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface HotelRepository extends JpaRepository<Hotels, Long> {
@@ -19,5 +21,8 @@ public interface HotelRepository extends JpaRepository<Hotels, Long> {
             "INNER JOIN Facilities fac ON fac.facility_id = hofa.id_facility\n" +
             "WHERE h.hotel_id = ?1")
     List<HotelDetail> getDetailHotel(Integer hotelId);
-
+    @Modifying
+    @Query(value = "INSERT INTO hotels(hotel_name, hotel_description, hotel_contract_number, hotel_address, hotel_city, hotel_country, hotel_email, check_in_time, check_out_time)" +
+            "VALUES(?1,?2,?3,?4,?5,?6,?7,?8,?9)", nativeQuery = true)
+    void addHotelRepo(String hotelName, String hotelDescribe, String phoneNumber, String hotelAddress, String hotelCity, String hotelCountry, String hotelEmail, LocalDate checkInTime, LocalDate checkOutTime);
 }
