@@ -2,10 +2,13 @@ package com.capstone.Hotel.Controllers;
 
 import com.capstone.Hotel.DTOs.ResponseHotel;
 import com.capstone.Hotel.DTOs.ResponseStatus;
+import com.capstone.Hotel.Entities.HotelDetail;
 import com.capstone.Hotel.Entities.Hotels;
 import com.capstone.Hotel.Services.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "api/hotel")
@@ -19,7 +22,21 @@ public class HotelController {
 
     @GetMapping("/detail")
     public ResponseHotel GetDetailHotel(@RequestParam(name="hotelId", required = true) Integer hotelId){
-         return hotelService.getDetailHotel(hotelId);
+        HotelDetail data = hotelService.getDetailHotel(hotelId);
+        if (data == null){
+            return new ResponseHotel(
+              500,
+                    null,
+              "No data from hotel with id = " + hotelId
+            );
+        }
+        else{
+            return new ResponseHotel(
+                    200,
+                    data,
+                    "Successful"
+            );
+        }
     }
 
     @PostMapping("/add")

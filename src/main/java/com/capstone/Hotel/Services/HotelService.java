@@ -22,28 +22,28 @@ public class HotelService {
         this.hotelRepository = hotelRepository;
     }
 
-    public ResponseHotel getDetailHotel(Integer hotelId){
+    public HotelDetail getDetailHotel(Integer hotelId){
         List<HotelDetail> data = hotelRepository.getDetailHotel(hotelId);
 
-        Map<Integer, List<HotelDetail>> groupedHotel = data.stream()
-                .collect(Collectors.groupingBy(HotelDetail::getHotel_id));
+        if (data.isEmpty()){
+            return null;
+        }
+        else{
+            Map<Integer, List<HotelDetail>> groupedHotel = data.stream()
+                    .collect(Collectors.groupingBy(HotelDetail::getHotel_id));
 
-        List<HotelDetail> transformedHotel = groupedHotel.values().stream()
-                .map(roomsInGroup -> {
-                    HotelDetail firstRoom = roomsInGroup.get(0);
-                    List<String> facilities = roomsInGroup.stream()
-                            .map(HotelDetail::getFacilities)
-                            .collect(Collectors.toList());
-                    firstRoom.setFacilities(facilities.toString());
-                    return firstRoom;
-                })
-                .collect(Collectors.toList());
-        
-        return new ResponseHotel(
-                200,
-                transformedHotel.get(0),
-                "Successful"
-        );
+            List<HotelDetail> transformedHotel = groupedHotel.values().stream()
+                    .map(roomsInGroup -> {
+                        HotelDetail firstRoom = roomsInGroup.get(0);
+                        List<String> facilities = roomsInGroup.stream()
+                                .map(HotelDetail::getFacilities)
+                                .collect(Collectors.toList());
+                        firstRoom.setFacilities(facilities.toString());
+                        return firstRoom;
+                    })
+                    .collect(Collectors.toList());
+            return transformedHotel.get(0);
+        }
     }
 
     @Transactional
