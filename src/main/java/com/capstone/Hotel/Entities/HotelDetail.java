@@ -1,6 +1,9 @@
 package com.capstone.Hotel.Entities;
 
+import com.capstone.Hotel.DTOs.ResponseFacility;
+
 import java.time.LocalDate;
+import java.util.List;
 
 public class HotelDetail {
     private Integer hotel_id;
@@ -9,12 +12,21 @@ public class HotelDetail {
     private String hotel_description;
     private Double star_rating;
     private String hotel_images;
-    private String facilities;
+    private List<ResponseFacility> facilities;
 
     public HotelDetail() {
     }
 
-    public HotelDetail(Integer hotel_id, String hotel_name, String hotel_address, String hotel_description, Double star_rating, String hotel_images, String facilities) {
+    public HotelDetail(Integer hotel_id, String hotel_name, String hotel_address, String hotel_description, Double star_rating, String hotel_images) {
+        this.hotel_id = hotel_id;
+        this.hotel_name = hotel_name;
+        this.hotel_address = hotel_address;
+        this.hotel_description = hotel_description;
+        this.star_rating = star_rating;
+        this.hotel_images = hotel_images;
+    }
+
+    public HotelDetail(Integer hotel_id, String hotel_name, String hotel_address, String hotel_description, Double star_rating, String hotel_images, List<ResponseFacility> facilities) {
         this.hotel_id = hotel_id;
         this.hotel_name = hotel_name;
         this.hotel_address = hotel_address;
@@ -72,11 +84,11 @@ public class HotelDetail {
         this.hotel_images = hotel_images;
     }
 
-    public String getFacilities() {
+    public List<ResponseFacility> getFacilities() {
         return facilities;
     }
 
-    public void setFacilities(String facilities) {
+    public void setFacilities(List<ResponseFacility> facilities) {
         this.facilities = facilities;
     }
 

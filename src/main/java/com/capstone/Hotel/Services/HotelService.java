@@ -1,6 +1,7 @@
 package com.capstone.Hotel.Services;
 
 import com.capstone.Hotel.DTOs.RequestBodyDTO;
+import com.capstone.Hotel.DTOs.ResponseFacility;
 import com.capstone.Hotel.DTOs.ResponseHotel;
 import com.capstone.Hotel.DTOs.ResponseStatus;
 import com.capstone.Hotel.Entities.HotelDetail;
@@ -30,19 +31,23 @@ public class HotelService {
             return null;
         }
         else{
+            List<ResponseFacility> facilitiesList = hotelRepository.listFacilities(hotelId);
+
+            Map<Integer, List<ResponseFacility>> groupedFacility = facilitiesList.stream()
+                    .collect(Collectors.groupingBy(ResponseFacility::gethotel_id));
+
             Map<Integer, List<HotelDetail>> groupedHotel = data.stream()
                     .collect(Collectors.groupingBy(HotelDetail::getHotel_id));
 
             List<HotelDetail> transformedHotel = groupedHotel.values().stream()
-                    .map(roomsInGroup -> {
-                        HotelDetail firstRoom = roomsInGroup.get(0);
-                        List<String> facilities = roomsInGroup.stream()
-                                .map(HotelDetail::getFacilities)
-                                .collect(Collectors.toList());
-                        firstRoom.setFacilities(facilities.toString());
-                        return firstRoom;
-                    })
+                    .map(hotelsInGroup -> hotelsInGroup.get(0))
                     .collect(Collectors.toList());
+
+            transformedHotel.forEach(i -> {
+                var facilityListData = groupedFacility.get(i.getHotel_id());
+                i.setFacilities(facilityListData);
+            });
+
             return transformedHotel.get(0);
         }
     }
