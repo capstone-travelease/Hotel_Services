@@ -13,13 +13,13 @@ public class HotelDetail {
     private String hotel_country;
     private String hotel_description;
     private Double star_rating;
-    private String hotel_images;
+    private String images;
     private List<ResponseFacility> facilities;
 
     public HotelDetail() {
     }
 
-    public HotelDetail(Integer hotel_id, String hotel_name, String hotel_address, String hotel_city, String hotel_country, String hotel_description, Double star_rating, String hotel_images) {
+    public HotelDetail(Integer hotel_id, String hotel_name, String hotel_address, String hotel_city, String hotel_country, String hotel_description, Double star_rating, String images) {
         this.hotel_id = hotel_id;
         this.hotel_name = hotel_name;
         this.hotel_address = hotel_address;
@@ -27,10 +27,10 @@ public class HotelDetail {
         this.hotel_country= hotel_country;
         this.hotel_description = hotel_description;
         this.star_rating = star_rating;
-        this.hotel_images = hotel_images;
+        this.images = images;
     }
 
-    public HotelDetail(Integer hotel_id, String hotel_name, String hotel_address, String hotel_city, String hotel_country, String hotel_description, Double star_rating, String hotel_images, List<ResponseFacility> facilities) {
+    public HotelDetail(Integer hotel_id, String hotel_name, String hotel_address, String hotel_city, String hotel_country, String hotel_description, Double star_rating, String images, List<ResponseFacility> facilities) {
         this.hotel_id = hotel_id;
         this.hotel_name = hotel_name;
         this.hotel_address = hotel_address;
@@ -38,7 +38,7 @@ public class HotelDetail {
         this.hotel_country= hotel_country;
         this.hotel_description = hotel_description;
         this.star_rating = star_rating;
-        this.hotel_images = hotel_images;
+        this.images = images;
         this.facilities = facilities;
     }
 
@@ -98,12 +98,12 @@ public class HotelDetail {
         this.star_rating = star_rating;
     }
 
-    public String getHotel_images() {
-        return hotel_images;
+    public String getimages() {
+        return images;
     }
 
-    public void setHotel_images(String hotel_images) {
-        this.hotel_images = hotel_images;
+    public void setimages(String images) {
+        this.images = images;
     }
 
     public List<ResponseFacility> getFacilities() {
@@ -124,7 +124,7 @@ public class HotelDetail {
                 ", hotel_country='" + hotel_country + '\'' +
                 ", hotel_description='" + hotel_description + '\'' +
                 ", star_rating=" + star_rating +
-                ", hotel_images='" + hotel_images + '\'' +
+                ", images='" + images + '\'' +
                 ", facilities=" + facilities +
                 '}';
     }
