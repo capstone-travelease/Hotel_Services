@@ -1,5 +1,6 @@
 package com.capstone.Hotel.Entities;
 
+import com.capstone.Hotel.DTOs.ResponseAttachment;
 import com.capstone.Hotel.DTOs.ResponseFacility;
 
 import java.time.LocalDate;
@@ -13,13 +14,23 @@ public class HotelDetail {
     private String hotel_country;
     private String hotel_description;
     private Double star_rating;
-    private String images;
+    private List<ResponseAttachment> images;
     private List<ResponseFacility> facilities;
 
     public HotelDetail() {
     }
 
-    public HotelDetail(Integer hotel_id, String hotel_name, String hotel_address, String hotel_city, String hotel_country, String hotel_description, Double star_rating, String images) {
+    public HotelDetail(Integer hotel_id, String hotel_name, String hotel_address, String hotel_city, String hotel_country, String hotel_description, Double star_rating) {
+        this.hotel_id = hotel_id;
+        this.hotel_name = hotel_name;
+        this.hotel_address = hotel_address;
+        this.hotel_city = hotel_city;
+        this.hotel_country = hotel_country;
+        this.hotel_description = hotel_description;
+        this.star_rating = star_rating;
+    }
+
+    public HotelDetail(Integer hotel_id, String hotel_name, String hotel_address, String hotel_city, String hotel_country, String hotel_description, Double star_rating, List<ResponseAttachment> images) {
         this.hotel_id = hotel_id;
         this.hotel_name = hotel_name;
         this.hotel_address = hotel_address;
@@ -30,7 +41,7 @@ public class HotelDetail {
         this.images = images;
     }
 
-    public HotelDetail(Integer hotel_id, String hotel_name, String hotel_address, String hotel_city, String hotel_country, String hotel_description, Double star_rating, String images, List<ResponseFacility> facilities) {
+    public HotelDetail(Integer hotel_id, String hotel_name, String hotel_address, String hotel_city, String hotel_country, String hotel_description, Double star_rating, List<ResponseAttachment> images, List<ResponseFacility> facilities) {
         this.hotel_id = hotel_id;
         this.hotel_name = hotel_name;
         this.hotel_address = hotel_address;
@@ -98,11 +109,11 @@ public class HotelDetail {
         this.star_rating = star_rating;
     }
 
-    public String getimages() {
+    public List<ResponseAttachment> getimages() {
         return images;
     }
 
-    public void setimages(String images) {
+    public void setimages(List<ResponseAttachment> images) {
         this.images = images;
     }
 
