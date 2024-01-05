@@ -26,7 +26,7 @@ public interface HotelRepository extends JpaRepository<Hotels, Long> {
             "VALUES(?1,?2,?3,?4,?5,?6,?7,?8,?9)", nativeQuery = true)
     void addHotelRepo(String hotelName, String hotelDescribe, String phoneNumber, String hotelAddress, String hotelCity, String hotelCountry, String hotelEmail, LocalDate checkInTime, LocalDate checkOutTime);
 
-    @Query("SELECT new com.capstone.Hotel.DTOs.ResponseFacility(f.facility_id, f.facility_name, h.hotel_id)FROM Facilities f\n" +
+    @Query("SELECT new com.capstone.Hotel.DTOs.ResponseFacility(f.facility_id, f.facility_name, h.hotel_id, f.facility_image)FROM Facilities f\n" +
             "INNER JOIN HotelFacilities hf ON hf.id_facility = f.facility_id\n" +
             "INNER JOIN Hotels h ON h.hotel_id = hf.id_hotel\n" +
             "WHERE h.hotel_id = ?1")

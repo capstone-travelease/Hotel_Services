@@ -14,17 +14,17 @@ public class Facilities {
     private String facility_name;
     @Column(name = "facility_type")
     private String facility_type;
-    @Column(name = "facility_price")
-    private String facility_price;
+    @Column(name = "facility_image")
+    private String facility_image;
 
     public Facilities() {
     }
 
-    public Facilities(Integer facility_id, String facility_name, String facility_type, String facility_price) {
+    public Facilities(Integer facility_id, String facility_name, String facility_type, String facility_image) {
         this.facility_id = facility_id;
         this.facility_name = facility_name;
         this.facility_type = facility_type;
-        this.facility_price = facility_price;
+        this.facility_image = facility_image;
     }
 
     public Integer getFacility_id() {
@@ -51,11 +51,11 @@ public class Facilities {
         this.facility_type = facility_type;
     }
 
-    public String getFacility_price() {
-        return facility_price;
+    public String getfacility_image() {
+        return facility_image;
     }
 
-    public void setFacility_price(String facility_price) {
-        this.facility_price = facility_price;
+    public void setfacility_image(String facility_image) {
+        this.facility_image = facility_image;
     }
 }
