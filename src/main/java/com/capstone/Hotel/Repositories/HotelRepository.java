@@ -16,9 +16,10 @@ import java.util.Optional;
 
 @Repository
 public interface HotelRepository extends JpaRepository<Hotels, Long> {
-    @Query(value = "SELECT new com.capstone.Hotel.Entities.HotelDetail(h.hotel_id, h.hotel_name, h.hotel_address, h.hotel_city, h.hotel_country, h.hotel_description, h.star_rating) FROM Hotels h\n" +
+    @Query(value = "SELECT new com.capstone.Hotel.Entities.HotelDetail(h.hotel_id, h.hotel_name, h.hotel_address, h.hotel_city, h.hotel_country, h.hotel_description, h.star_rating, r.room_price) FROM Hotels h\n" +
             "INNER JOIN HotelAttachment hatc ON hatc.hotel_id = h.hotel_id\n" +
             "INNER JOIN Attachment atc ON atc.attachment_id = hatc.attachment_id\n" +
+            "INNER JOIN Rooms r ON r.hotel_id = h.hotel_id\n" +
             "WHERE h.hotel_id = ?1")
     List<HotelDetail> getDetailHotel(Integer hotelId);
     @Modifying

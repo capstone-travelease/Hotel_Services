@@ -16,6 +16,7 @@ public class HotelDetail {
     private Double star_rating;
     private List<ResponseAttachment> images;
     private List<ResponseFacility> facilities;
+    private Double price;
 
     public HotelDetail() {
     }
@@ -28,6 +29,17 @@ public class HotelDetail {
         this.hotel_country = hotel_country;
         this.hotel_description = hotel_description;
         this.star_rating = star_rating;
+    }
+
+    public HotelDetail(Integer hotel_id, String hotel_name, String hotel_address, String hotel_city, String hotel_country, String hotel_description, Double star_rating, Double price) {
+        this.hotel_id = hotel_id;
+        this.hotel_name = hotel_name;
+        this.hotel_address = hotel_address;
+        this.hotel_city = hotel_city;
+        this.hotel_country = hotel_country;
+        this.hotel_description = hotel_description;
+        this.star_rating = star_rating;
+        this.price = price;
     }
 
     public HotelDetail(Integer hotel_id, String hotel_name, String hotel_address, String hotel_city, String hotel_country, String hotel_description, Double star_rating, List<ResponseAttachment> images) {
@@ -51,6 +63,31 @@ public class HotelDetail {
         this.star_rating = star_rating;
         this.images = images;
         this.facilities = facilities;
+    }
+
+    public HotelDetail(Integer hotel_id, String hotel_name, String hotel_address, String hotel_city, String hotel_country, String hotel_description, Double star_rating, List<ResponseAttachment> images, Double price) {
+        this.hotel_id = hotel_id;
+        this.hotel_name = hotel_name;
+        this.hotel_address = hotel_address;
+        this.hotel_city = hotel_city;
+        this.hotel_country = hotel_country;
+        this.hotel_description = hotel_description;
+        this.star_rating = star_rating;
+        this.images = images;
+        this.price = price;
+    }
+
+    public HotelDetail(Integer hotel_id, String hotel_name, String hotel_address, String hotel_city, String hotel_country, String hotel_description, Double star_rating, List<ResponseAttachment> images, List<ResponseFacility> facilities, Double price) {
+        this.hotel_id = hotel_id;
+        this.hotel_name = hotel_name;
+        this.hotel_address = hotel_address;
+        this.hotel_city = hotel_city;
+        this.hotel_country = hotel_country;
+        this.hotel_description = hotel_description;
+        this.star_rating = star_rating;
+        this.images = images;
+        this.facilities = facilities;
+        this.price = price;
     }
 
     public Integer getHotel_id() {
@@ -125,6 +162,14 @@ public class HotelDetail {
         this.facilities = facilities;
     }
 
+    public Double getprice() {
+        return price;
+    }
+
+    public void setprice(Double price) {
+        this.price = price;
+    }
+
     @Override
     public String toString() {
         return "HotelDetail{" +
@@ -135,8 +180,9 @@ public class HotelDetail {
                 ", hotel_country='" + hotel_country + '\'' +
                 ", hotel_description='" + hotel_description + '\'' +
                 ", star_rating=" + star_rating +
-                ", images='" + images + '\'' +
+                ", images=" + images +
                 ", facilities=" + facilities +
+                ", price=" + price +
                 '}';
     }
 }
