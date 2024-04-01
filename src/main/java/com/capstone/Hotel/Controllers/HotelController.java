@@ -2,6 +2,7 @@ package com.capstone.Hotel.Controllers;
 
 import com.capstone.Hotel.DTOs.RequestBodyDTO;
 import com.capstone.Hotel.DTOs.ResponseHotel;
+import com.capstone.Hotel.DTOs.ResponseListHotelDetail;
 import com.capstone.Hotel.DTOs.ResponseStatus;
 import com.capstone.Hotel.Entities.HotelDetail;
 import com.capstone.Hotel.Entities.Hotels;
@@ -48,5 +49,14 @@ public class HotelController {
     @DeleteMapping("/delete")
     public ResponseStatus DeleteHotel(@RequestParam(name="hotelId", required = true) Long hotelId){
         return hotelService.deleteHotel(hotelId);
+    }
+
+    @GetMapping("/suggestHotel")
+    public ResponseListHotelDetail SuggestHotel(){
+        return new ResponseListHotelDetail(
+                200,
+                hotelService.suggestHotel(),
+                "Successful"
+        );
     }
 }

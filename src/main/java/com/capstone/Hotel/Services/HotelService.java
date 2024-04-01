@@ -8,8 +8,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -84,6 +83,61 @@ public class HotelService {
         }
     }
 
-    public void updateHotel(){
+    public List<HotelDetail> suggestHotel(){
+        List<Hotels> listHotels = hotelRepository.getAllHotel();
+        List<HotelDetail> suggestList = new LinkedList<>();
+        List<Integer> highestStarHotelId = getHighestStartHotelId(listHotels);
+
+        for (Integer hotelId : highestStarHotelId){
+            List<HotelDetail> data = hotelRepository.getDetailHotel(hotelId);
+
+            List<ResponseAttachment> attachmentList = hotelRepository.listAttachment(hotelId);
+
+            Map<Integer, List<ResponseAttachment>> groupedAttachment = attachmentList.stream()
+                    .collect(Collectors.groupingBy(ResponseAttachment::getHotel_id));
+
+            Map<Integer, List<HotelDetail>> groupedHotel = data.stream()
+                    .collect(Collectors.groupingBy(HotelDetail::getHotel_id));
+
+            List<HotelDetail> transformedHotel = groupedHotel.values().stream()
+                    .map(hotelsInGroup -> hotelsInGroup.get(0))
+                    .toList();
+
+            transformedHotel.forEach(i -> {
+                var attachmentListData = groupedAttachment.get(i.getHotel_id());
+                i.setimages(attachmentListData);
+            });
+            suggestList.addAll(transformedHotel);
+        }
+
+        Collections.shuffle(suggestList);
+
+        if (suggestList.size() < 5){
+            return suggestList;
+        }
+        else{
+            List<HotelDetail> randomSubset = suggestList.subList(0, 5);
+            return randomSubset;
+        }
+    }
+
+    private static List<Integer> getHighestStartHotelId(List<Hotels> listHotels) {
+        List<Integer> highestStarHotelId = new LinkedList<>();
+
+        Double highestRating = 0.0;
+
+        // Search for the highest star rating number
+        for(var i = 0; i < listHotels.size(); i++){
+            if (listHotels.get(i).getStar_rating() >= listHotels.get(listHotels.size() - 1).getStar_rating()){
+                highestRating = listHotels.get(i).getStar_rating();
+            }
+        }
+
+        for (Hotels listHotel : listHotels) {
+            if (Objects.equals(listHotel.getStar_rating(), highestRating)) {
+                highestStarHotelId.add(listHotel.getHotel_id());
+            }
+        }
+        return highestStarHotelId;
     }
 }
