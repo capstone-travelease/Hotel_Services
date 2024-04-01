@@ -84,7 +84,7 @@ public class HotelService {
     }
 
     public List<HotelDetail> suggestHotel(){
-        List<Hotels> listHotels = hotelRepository.getAllHotel();
+        List<HotelDetail> listHotels = hotelRepository.getAllHotel();
         List<HotelDetail> suggestList = new LinkedList<>();
         List<Integer> highestStarHotelId = getHighestStartHotelId(listHotels);
 
@@ -116,12 +116,11 @@ public class HotelService {
             return suggestList;
         }
         else{
-            List<HotelDetail> randomSubset = suggestList.subList(0, 5);
-            return randomSubset;
+            return suggestList.subList(0, 5);
         }
     }
 
-    private static List<Integer> getHighestStartHotelId(List<Hotels> listHotels) {
+    private static List<Integer> getHighestStartHotelId(List<HotelDetail> listHotels) {
         List<Integer> highestStarHotelId = new LinkedList<>();
 
         Double highestRating = 0.0;
@@ -133,7 +132,7 @@ public class HotelService {
             }
         }
 
-        for (Hotels listHotel : listHotels) {
+        for (HotelDetail listHotel : listHotels) {
             if (Objects.equals(listHotel.getStar_rating(), highestRating)) {
                 highestStarHotelId.add(listHotel.getHotel_id());
             }
