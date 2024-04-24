@@ -127,8 +127,10 @@ public class HotelService {
 
         // Search for the highest star rating number
         for(var i = 0; i < listHotels.size(); i++){
-            if (listHotels.get(i).getStar_rating() >= listHotels.get(listHotels.size() - 1).getStar_rating()){
-                highestRating = listHotels.get(i).getStar_rating();
+            if(listHotels.get(i).getStar_rating() != null){
+                if (listHotels.get(i).getStar_rating() >= listHotels.get(listHotels.size() - 1).getStar_rating()){
+                    highestRating = listHotels.get(i).getStar_rating();
+                }
             }
         }
 
